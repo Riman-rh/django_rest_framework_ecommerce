@@ -8,7 +8,12 @@ from drf_yasg import openapi
 schema_view = get_schema_view(
    openapi.Info(
       title="ecommerce API",
+<<<<<<< HEAD
       default_version='v1',
+||||||| 1eaf559
+=======
+       default_version='v1',
+>>>>>>> c3f912d0c1f8319141fce352bbd65758aa3a2bfa
    ),
    public=True,
    permission_classes=[permissions.AllowAny],
