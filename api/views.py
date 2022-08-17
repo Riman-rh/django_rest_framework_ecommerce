@@ -77,9 +77,10 @@ def product_list(request):
     openapi.Parameter('name_en', openapi.IN_QUERY, type=openapi.TYPE_STRING),
     openapi.Parameter('name_fr', openapi.IN_QUERY, type=openapi.TYPE_STRING),
     openapi.Parameter('photo', openapi.IN_QUERY, type=openapi.TYPE_FILE),
+    openapi.Parameter('description', openapi.IN_QUERY, type=openapi.TYPE_STRING),
     openapi.Parameter('stock', openapi.IN_QUERY, type=openapi.TYPE_INTEGER),
 ],)
-@api_view(['post'])
+@api_view(['POST'])
 def product_create(request):
     serializer = ProductSerializer(data=request.data)
     if serializer.is_valid():
