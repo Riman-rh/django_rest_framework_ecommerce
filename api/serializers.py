@@ -81,7 +81,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'description',
             'photo',
             'stock',
-
         ]
 
 
@@ -107,6 +106,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'product',
             'quantity'
         ]
+
 
 class OrderGetSerializer(serializers.Serializer):
     id = serializers.IntegerField()
