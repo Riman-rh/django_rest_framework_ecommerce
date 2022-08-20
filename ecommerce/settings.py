@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     'api',
     'django_elasticsearch_dsl',
 ]
-
+'''
 ELASTICSEARCH_DSL = {
     'default': {
         'hosts': ['192.168.1.10']
     }
 }
-
+'''
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -6,7 +6,7 @@ from .models import Product, Review
 
 TEXT_RAW = dsl.Text(fields={"raw": dsl.Keyword()})
 
-
+'''
 @registry.register_document
 class ProductDocument(Document):
     class Index:
@@ -37,3 +37,4 @@ class ReviewDocument(Document):
             'rating',
             'comment',
         ]
+'''

@@ -17,7 +17,7 @@ client = elasticsearch.Elasticsearch(hosts=[ELASTIC_HOST])
 INDEXES = ['products_1']
 id_param = openapi.Parameter('id', openapi.IN_QUERY, type=openapi.TYPE_INTEGER)
 
-
+''''
 def get_x_content(query, index=INDEXES, fields=['name_en', 'description', 'comment']):
     if not query:
         return
@@ -36,7 +36,7 @@ def get_x_content(query, index=INDEXES, fields=['name_en', 'description', 'comme
         results.append(data)
         
     return results
-
+'''
 
 @api_view(['POST'])
 def registration(request):
