@@ -29,7 +29,7 @@ class Product(models.Model):
     name_ar = models.CharField(max_length=100)
     name_en = models.CharField(max_length=100)
     name_fr = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='images/', null=True, blank=True)
+    photo = models.ImageField(upload_to='images', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     stock = models.PositiveIntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
