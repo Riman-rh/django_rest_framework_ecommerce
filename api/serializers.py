@@ -60,6 +60,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
+            'id',
             'name_ar',
             'name_en',
             'name_fr',
