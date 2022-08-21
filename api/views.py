@@ -168,7 +168,7 @@ def review_update(request):
             review = Review.objects.get(id=request.data['id'])
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        if request.user == review.owner:
+        if request.user == review.owner.user:
             serializer = ReviewSerializer(instance=review, data=request.data)
             if serializer.is_valid():
                 serializer.save()
