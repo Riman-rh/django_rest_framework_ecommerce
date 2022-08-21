@@ -89,6 +89,16 @@ def product_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(method='put', manual_parameters=[
+    openapi.Parameter('id', openapi.IN_QUERY, type=openapi.TYPE_INTEGER),
+    openapi.Parameter('category', openapi.IN_QUERY, type=openapi.TYPE_INTEGER),
+    openapi.Parameter('name_ar', openapi.IN_QUERY, type=openapi.TYPE_STRING),
+    openapi.Parameter('name_en', openapi.IN_QUERY, type=openapi.TYPE_STRING),
+    openapi.Parameter('name_fr', openapi.IN_QUERY, type=openapi.TYPE_STRING),
+    openapi.Parameter('photo', openapi.IN_QUERY, type=openapi.TYPE_FILE),
+    openapi.Parameter('description', openapi.IN_QUERY, type=openapi.TYPE_STRING),
+    openapi.Parameter('stock', openapi.IN_QUERY, type=openapi.TYPE_INTEGER),
+],)
 @api_view(['PUT'])
 def product_update(request):
     if request.user.is_superuser:
@@ -129,7 +139,7 @@ def review_list(request):
         except Product.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         reviews = Review.objects.filter(product=product.id)
-        serializer = ReviewListSerializer(reviews, many=True)
+        serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
     return Response('not valid')
 
@@ -143,12 +153,28 @@ def review_list(request):
 @api_view(['POST'])
 def review_create(request):
     if request.user.is_authenticated:
-        serializer = ReviewListSerializer(data=request.data)
+        serializer = ReviewCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
         return Response(serializer.errors)
     return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['PUT'])
+def review_update(request):
+    if request.user.is_authenticated:
+        try:
+            review = Review.objects.get(id=request.data['id'])
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        if request.user == review.owner:
+            serializer = ReviewSerializer(instance=review, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response('ok')
+            return Response('something went wrong')
+    return Response("you'r not authorized!")
 
 
 @swagger_auto_schema(method='post', manual_parameters=[

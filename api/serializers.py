@@ -91,10 +91,23 @@ class ProductGetSerializer(serializers.Serializer):
     id = serializers.IntegerField()
 
 
-class ReviewListSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = [
+            'id'
+            'owner',
+            'product',
+            'rating',
+            'comment'
+        ]
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            'id'
             'owner',
             'product',
             'rating',

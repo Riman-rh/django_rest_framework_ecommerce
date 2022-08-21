@@ -16,6 +16,7 @@ urlpatterns = [
     path('productUpdate/',views.product_update),
     path('reviewList/',views.review_list),
     path('reviewCreate/',views.review_create),
+    path('reviewUpdate/',views.review_update),
     path('order/',views.orderProcess),
     path('orderComplete/', views.orderComplete)
 ]
