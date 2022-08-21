@@ -89,6 +89,22 @@ def product_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['PUT'])
+def product_update(request):
+    if request.user.is_superuser:
+        try:
+            product = Product.objects.get(id=request.data['id'])
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ProductSerializer(instance=product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response('ok')
+        return Response('something went wrong')
+    return Response("you'r not authorized!")
+
+
 @swagger_auto_schema(method='get', manual_parameters=[id_param])
 @api_view(['GET'])
 def product_get(request):

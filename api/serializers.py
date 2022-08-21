@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from .models import *
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'address', 'phone',#'avatar'
-        ]
+        fields = ['first_name', 'last_name', 'address', 'phone','avatar']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -36,7 +36,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             last_name=self.validated_data['profile']['last_name'],
             address=self.validated_data['profile']['address'],
             phone=self.validated_data['profile']['phone'],
-            #avatar=self.validated_data['profile']['avatar']
+            avatar=self.validated_data['profile']['avatar']
 
         )
         profile.save()
@@ -76,6 +76,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
+
             'category',
             'name_ar',
             'name_en',
