@@ -31,8 +31,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
         profile = Profile(
             user=user,
-            first_name=self.validated_data['profile']['firstname'],
-            last_name=self.validated_data['profile']['lastname'],
+            first_name=self.validated_data['profile']['first_name'],
+            last_name=self.validated_data['profile']['last_name'],
             address=self.validated_data['profile']['address'],
             phone=self.validated_data['profile']['phone'],
             avatar=self.validated_data['profile']['avatar']
