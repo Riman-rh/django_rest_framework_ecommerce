@@ -144,11 +144,11 @@ def review_create(request):
 def orderProcess(request):
     if request.user.is_authenticated:
         order, created = Order.objects.get_or_create(owner=request.user, complete=False)
-        print(request.data)
         for data in request.data:
             serializer = OrderItemSerializer(data=data)
             if serializer.is_valid():
                 serializer.save(order=order)
+                return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 

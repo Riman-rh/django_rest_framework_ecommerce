@@ -1,19 +1,18 @@
 from rest_framework import serializers
 from .models import *
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['firstname', 'lastname', 'address', 'phone','avatar']
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
-    firstname = serializers.CharField()
-    lastname = serializers.CharField()
-    address = serializers.CharField()
-    phone = serializers.CharField()
-    avatar = serializers.URLField()
+    profile = ProfileSerializer()
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'password2', 'firstname', 'lastname', 'address', 'phone','avatar'
-                 ]
+        fields = ['username', 'email', 'password', 'password2','profile']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -31,11 +30,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
         profile = Profile(
             user=user,
-            first_name=self.validated_data['firstname'],
-            last_name=self.validated_data['lastname'],
-            address=self.validated_data['address'],
-            phone=self.validated_data['phone'],
-            avatar=self.validated_data['avatar']
+            first_name=self.validated_data['profile']['firstname'],
+            last_name=self.validated_data['profile']['lastname'],
+            address=self.validated_data['profile']['address'],
+            phone=self.validated_data['profile']['phone'],
+            avatar=self.validated_data['profile']['avatar']
 
         )
         profile.save()
