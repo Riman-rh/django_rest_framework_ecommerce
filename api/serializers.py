@@ -4,7 +4,8 @@ from .models import *
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['firstname', 'lastname', 'address', 'phone','avatar']
+        fields = ['first_name', 'last_name', 'address', 'phone','avatar']
+
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
